@@ -54,6 +54,25 @@ export const QuoteComponent = () => {
         // Generate a random hex color code
         return "#" + Math.floor(Math.random() * 16777215).toString(16);
     };
+
+    const shareOnTwitter = () => {
+        const twitterBaseUrl = "https://twitter.com/intent/tweet";
+        const text = encodeURIComponent(`"${data.quote}" - ${data.author}`);
+        const hashtags = encodeURIComponent("QuoteOfTheDay"); // Puedes ajustar los hashtags
+        const twitterUrl = `${twitterBaseUrl}?text=${text}&hashtags=${hashtags}`;
+
+        window.open(twitterUrl, "_blank");
+    };
+
+    const shareOnTumblr = () => {
+        const tumblrBaseUrl = "https://www.tumblr.com/widgets/share/tool";
+        const text = encodeURIComponent(`"${data.quote}" - ${data.author}`);
+        const tags = encodeURIComponent("QuoteOfTheDay"); // Puedes ajustar las etiquetas
+        const tumblrUrl = `${tumblrBaseUrl}?posttype=quote&content=${text}&tags=${tags}`;
+
+        window.open(tumblrUrl, "_blank");
+    };
+    
     return (
         <>
             <div className="container background-color">
@@ -72,10 +91,20 @@ export const QuoteComponent = () => {
                     </p>
 
                     <div className="buttons">
-                        <a className="link" id="twiter-link">
+                        <a
+                            className="link"
+                            id="twiter-link"
+                            target="_blank"
+                            onClick={shareOnTwitter}
+                        >
                             <i className="fa-brands fa-twitter"></i>
                         </a>
-                        <a className="link" id="tumblr-link">
+                        <a
+                            className="link"
+                            id="tumblr-link"
+                            onClick={shareOnTumblr}
+                            target="_blank"
+                        >
                             <i className="fa-brands fa-tumblr"></i>
                         </a>
                         <button
